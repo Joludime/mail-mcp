@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v3
+
+    - name: 🟢 Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: mcp-mail/package-lock.json
+
+    - name: 📦 Install dependencies
+      run: |
+        cd mcp-mail
+        npm ci
+
+    - name: 🔍 Run security audit
+      run: |
+        cd mcp-mail
+        npm audit --audit-level=high
+      continue-on-error: true
+
+    - name: ✅ Verify installation
+      run: |
+        cd mcp-mail
+        node --version
+        npm --version
+        ls -la
+
+    - name: 📝 Check for .env file (should not exist)
+      run: |
+        if [ -f "mcp-mail/.env" ]; then
+          echo "❌ ERROR: .env file found in repository!"
+          exit 1
+        else
+          echo "✅ .env file not found (correct)"
+        fi

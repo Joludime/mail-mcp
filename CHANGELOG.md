@@ -5,6 +5,27 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-11-17
+
+### 🐛 Corregido
+- **[CRÍTICO]** Actualización del servidor MCP a la API correcta del SDK v1.22.0
+  - Migrado de `McpServer` obsoleto a `Server` actual
+  - Implementación correcta de `ListToolsRequestSchema` y `CallToolRequestSchema`
+  - Corrección del método de registro de herramientas (ya no se usa `.tool()`)
+  - Mejora en la estructura de respuestas con formato JSON detallado
+- Validación mejorada de variables de entorno
+- Mensajes de error más descriptivos
+- Mejor logging en stderr para debugging
+
+### 🔄 Cambiado
+- Estructura de respuesta ahora incluye más detalles (messageId, response, etc.)
+- Soporte mejorado para HTML en el cuerpo del mensaje
+- Conversión automática de saltos de línea a `<br>` en HTML
+
+### 📝 Documentación
+- Se documenta la corrección crítica de la API
+- Actualización de ejemplos de uso
+
 ## [1.0.0] - 2025-11-14
 
 ### ✨ Agregado

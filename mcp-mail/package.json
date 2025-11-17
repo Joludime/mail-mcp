@@ -1,6 +1,6 @@
 {
   "name": "mcp-mail",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Servidor MCP para enviar correos",
   "main": "mcp-mail.mjs",
   "type": "module",
@@ -13,4 +13,3 @@
     "nodemailer": "^7.0.10"
   }
 }
-
